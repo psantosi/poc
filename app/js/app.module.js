@@ -1,0 +1,1 @@
+var PocApp = angular.module('pocApp', ['ui.bootstrap']);

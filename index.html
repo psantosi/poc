@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="pocApp">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="./lib/angular.min.js"></script>
+    <script src="./node_modules/ui-bootstrap4/dist/ui-bootstrap.js"></script>
+    <script src="./node_modules/ui-bootstrap4/dist/ui-bootstrap-tpls.js"></script>
+    <script src="./app/js/app.module.js"></script>
+    <script src="./app/js/controller/app-controller.js"></script>
+    <script src="./app/_shared/modal-confirmacao-controller.js"></script>
+    <script src="./app/js/service/app-service.js"></script>
+
+    <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./node_modules/ui-bootstrap4/dist/ui-bootstrap-csp.css">
+    <link rel="stylesheet" href="./asset/css/utils.css">
+</head>
+<body ng-controller="AppController as vm">
+    
+    <div class="container">
+        <div class="jumbotron">
+            <h1 class="text-center">Poc</h1>
+        </div>
+
+        <h4 class="text-primary">Origem: <strong>{{ vm.enderecos.origem.nivel }}</strong></h4>
+        <h4 class="text-warning">Destino: <strong>{{ vm.enderecos.destino.nivel }}</strong></h4>
+        
+        <div ng-repeat="lista in vm.lista">
+            <p>{{ lista.rua}}</p>
+            <div class="row">
+                <div class="col" ng-repeat="coluna in lista.colunas">
+                    <div class="row" ng-repeat="nivel in coluna.niveis">
+                        <div class="col alert border pointer"
+                         ng-class="{
+                            'border-primary' : nivel.enderecoLogisticoKey === vm.enderecos.origem.enderecoLogisticoKey,
+                            'border-warning' : nivel.enderecoLogisticoKey === vm.enderecos.destino.enderecoLogisticoKey}"
+                        ng-click="vm.selecionar(nivel)">
+                            {{ coluna.coluna }} . {{ nivel.nivel }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+
+</body>
+</html>
